@@ -15,20 +15,6 @@ import javax.inject.Named;
  */
 @SessionScoped
 @Named
-public class ChooseName implements Serializable {
-    
-    private String inputName;
-
-    public String getInputName() {
-        return inputName;
-    }
-
-    public void setInputName(String inputName) {
-        this.inputName = inputName;
-    }
-    
-    public String navigateToChat() {
-        return "/Chat.xhtml?faces-redirect=false";
-    }
+public class Chat implements Serializable{
     
 }
