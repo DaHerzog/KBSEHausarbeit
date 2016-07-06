@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.hsos.kbse.messagingclient.dtos;
+package de.hsos.kbse.messaging.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.enterprise.inject.Vetoed;
 
@@ -13,7 +14,7 @@ import javax.enterprise.inject.Vetoed;
  * @author davidherzog
  */
 @Vetoed
-public class MyMessageDTO {
+public class MyMessage implements Serializable {
     
     private Date dateSent;
     private String message;

@@ -5,8 +5,10 @@
  */
 package de.hsos.kbse.messagingclient.boundary;
 
+import de.hsos.kbse.messaging.entities.MyMessage;
 import de.hsos.kbse.messagingclient.jmsproxy.MessagingProxy;
 import java.io.Serializable;
+import java.util.Date;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.enterprise.context.SessionScoped;
@@ -41,7 +43,13 @@ public class Chat implements Serializable{
     }
     
     public void sendMessage() {
-        msgProxy.sendMessage("test1234");
+        MyMessage newMsg = new MyMessage();
+        
+        newMsg.setMessage(theMessage);
+        newMsg.setAuthor(userName);
+        newMsg.setDateSent(new Date());
+        
+        msgProxy.sendMessage(newMsg);
     }
     
     public String getUserName() {

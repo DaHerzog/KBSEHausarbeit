@@ -5,6 +5,7 @@
  */
 package de.hsos.kbse.messagingclient.jmsproxy;
 
+import de.hsos.kbse.messaging.entities.MyMessage;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
+import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
@@ -59,9 +61,10 @@ public class MessagingProxy implements Serializable{
         }
     }
     
-    public void sendMessage(String msg) {
+    public void sendMessage(MyMessage msg) {
         try {
-            TextMessage myMsg = mySession.createTextMessage(msg);
+            ObjectMessage myMsg = mySession.createObjectMessage();
+            myMsg.setObject(msg);
             myProducer.send(myMsg);
         } catch (JMSException ex) {
             Logger.getLogger(MessagingProxy.class.getName()).log(Level.SEVERE, null, ex);
