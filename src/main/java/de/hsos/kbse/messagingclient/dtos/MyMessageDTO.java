@@ -13,7 +13,7 @@ import javax.enterprise.inject.Vetoed;
  * @author davidherzog
  */
 @Vetoed
-public class MyMessage {
+public class MyMessageDTO {
     
     private Date dateSent;
     private String message;
