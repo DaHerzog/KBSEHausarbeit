@@ -15,6 +15,9 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlOutputText;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.jms.Message;
@@ -65,7 +68,14 @@ public class Chat implements Serializable{
     }
     
     public void displayNewMessage(String msg) {
-        System.out.println("in der boundary" + msg);
+        /*UIComponent messageDiv = FacesContext.getCurrentInstance().getViewRoot().findComponent("messages");
+        if (messageDiv != null) {
+            HtmlOutputText newText = (HtmlOutputText)FacesContext.getCurrentInstance().getApplication().createComponent(HtmlOutputText.COMPONENT_TYPE);
+            newText.setValue(msg);
+
+            messageDiv.getChildren().add(newText);
+        }*/
+        System.out.println("TO DO.....");
     }
     
     public String getUserName() {
