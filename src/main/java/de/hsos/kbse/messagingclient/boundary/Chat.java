@@ -23,10 +23,6 @@ import javax.jms.Message;
  *
  * @author davidherzog
  */
-/*@MessageDriven(activationConfig = {
-    @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/myTopic"),
-    @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
-})*/ //Als MDB funktioniert es nicht mehr als Boundary für JSF Views
 @SessionScoped
 @Named
 public class Chat implements Serializable{
@@ -46,7 +42,6 @@ public class Chat implements Serializable{
     
     @PostConstruct
     public void init() {
-        this.userName = "Testweise";
         this.myObserver.registerChat(this);
     }
     
@@ -87,6 +82,10 @@ public class Chat implements Serializable{
 
     public void setTheMessage(String theMessage) {
         this.theMessage = theMessage;
+    }
+    
+    public String navigateToChat() {
+        return "/Chat.xhtml?faces-redirect=false";
     }
     
 }
