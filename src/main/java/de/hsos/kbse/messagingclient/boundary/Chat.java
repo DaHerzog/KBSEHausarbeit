@@ -5,12 +5,12 @@
  */
 package de.hsos.kbse.messagingclient.boundary;
 
-import de.hsos.kbse.messaging.entities.MyMessage;
+import de.hsos.kbse.messaging.dtos.MyMessageDTO;
 import de.hsos.kbse.messagingclient.jmsproxy.MessagingProxy;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
-import javax.ejb.ActivationConfigProperty;
-import javax.ejb.MessageDriven;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,16 +38,20 @@ public class Chat implements Serializable{
         
     }
     
-    public void onMessage(Message inMsg) {
-        
+    @PostConstruct
+    public void init() {
+        this.userName = "Testweise";
     }
     
     public void sendMessage() {
-        MyMessage newMsg = new MyMessage();
+        MyMessageDTO newMsg = new MyMessageDTO();
         
         newMsg.setMessage(theMessage);
         newMsg.setAuthor(userName);
-        newMsg.setDateSent(new Date());
+        
+        DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.LONG);
+        Date actualDate = new Date();
+        newMsg.setDateSent(df.format(actualDate));
         
         msgProxy.sendMessage(newMsg);
     }

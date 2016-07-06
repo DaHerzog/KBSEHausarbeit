@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.hsos.kbse.messaging.entities;
+package de.hsos.kbse.messaging.dtos;
 
 import java.io.Serializable;
-import java.util.Date;
-import javax.enterprise.inject.Vetoed;
 
 /**
  *
  * @author davidherzog
  */
-@Vetoed
-public class MyMessage implements Serializable {
+public class MyMessageDTO implements Serializable{
     
-    private Date dateSent;
+    private String dateSent;
     private String message;
     private String author;
 
@@ -36,13 +33,12 @@ public class MyMessage implements Serializable {
         this.author = author;
     }
 
-    public Date getDateSent() {
+    public String getDateSent() {
         return dateSent;
     }
 
-    public void setDateSent(Date dateSent) {
+    public void setDateSent(String dateSent) {
         this.dateSent = dateSent;
     }
-   
     
 }

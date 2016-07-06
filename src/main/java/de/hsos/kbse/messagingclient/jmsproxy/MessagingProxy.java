@@ -5,7 +5,7 @@
  */
 package de.hsos.kbse.messagingclient.jmsproxy;
 
-import de.hsos.kbse.messaging.entities.MyMessage;
+import de.hsos.kbse.messaging.dtos.MyMessageDTO;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,7 +61,7 @@ public class MessagingProxy implements Serializable{
         }
     }
     
-    public void sendMessage(MyMessage msg) {
+    public void sendMessage(MyMessageDTO msg) {
         try {
             ObjectMessage myMsg = mySession.createObjectMessage();
             myMsg.setObject(msg);
