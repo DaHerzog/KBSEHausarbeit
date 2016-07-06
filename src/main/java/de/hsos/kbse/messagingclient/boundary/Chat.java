@@ -6,11 +6,14 @@
 package de.hsos.kbse.messagingclient.boundary;
 
 import de.hsos.kbse.messaging.dtos.MyMessageDTO;
+import de.hsos.kbse.messagingclient.jmsproxy.MessageHandler;
 import de.hsos.kbse.messagingclient.jmsproxy.MessagingProxy;
+import de.hsos.kbse.messagingclient.observer.BoundaryObserver;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,6 +36,9 @@ public class Chat implements Serializable{
     
     @Inject
     MessagingProxy msgProxy;
+    
+    @Inject
+    BoundaryObserver myObserver;
 
     public Chat() {
         
@@ -41,7 +47,14 @@ public class Chat implements Serializable{
     @PostConstruct
     public void init() {
         this.userName = "Testweise";
+        this.myObserver.registerChat(this);
     }
+    
+    @PreDestroy
+    public void destroy() {
+        this.myObserver.deregisterChat(this);
+    }
+    
     
     public void sendMessage() {
         MyMessageDTO newMsg = new MyMessageDTO();
@@ -54,6 +67,10 @@ public class Chat implements Serializable{
         newMsg.setDateSent(df.format(actualDate));
         
         msgProxy.sendMessage(newMsg);
+    }
+    
+    public void displayNewMessage(String msg) {
+        System.out.println("in der boundary" + msg);
     }
     
     public String getUserName() {
