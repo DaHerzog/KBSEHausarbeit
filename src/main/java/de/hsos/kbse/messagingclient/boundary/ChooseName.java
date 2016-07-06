@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.hsos.kbse.hausarbeit.boundary;
+package de.hsos.kbse.messagingclient.boundary;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
@@ -15,16 +15,20 @@ import javax.inject.Named;
  */
 @SessionScoped
 @Named
-public class Chat implements Serializable{
+public class ChooseName implements Serializable {
     
-    private String userName;
+    private String inputName;
 
-    public String getUserName() {
-        return userName;
+    public String getInputName() {
+        return inputName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setInputName(String inputName) {
+        this.inputName = inputName;
+    }
+    
+    public String navigateToChat() {
+        return "/Chat.xhtml?faces-redirect=false";
     }
     
 }
