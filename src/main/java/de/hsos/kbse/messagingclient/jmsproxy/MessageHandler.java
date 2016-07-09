@@ -7,12 +7,14 @@ package de.hsos.kbse.messagingclient.jmsproxy;
 
 import de.hsos.kbse.messagingclient.boundary.Chat;
 import de.hsos.kbse.messagingclient.observer.BoundaryObserver;
+import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -26,8 +28,8 @@ import javax.jms.TextMessage;
     @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/myTopic"),
     @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic")
 })
-@ApplicationScoped
-public class MessageHandler {
+@SessionScoped
+public class MessageHandler implements Serializable{
     
     @Inject
     BoundaryObserver myObserver;

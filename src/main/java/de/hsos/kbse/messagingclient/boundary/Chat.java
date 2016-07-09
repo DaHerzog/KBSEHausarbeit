@@ -12,6 +12,8 @@ import de.hsos.kbse.messagingclient.observer.BoundaryObserver;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
@@ -21,6 +23,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.jms.Message;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -32,6 +35,9 @@ public class Chat implements Serializable{
     
     private String userName;
     private String theMessage;
+    
+    private List<String> allMessages;
+    
     
     @Inject
     MessagingProxy msgProxy;
@@ -46,6 +52,7 @@ public class Chat implements Serializable{
     @PostConstruct
     public void init() {
         this.myObserver.registerChat(this);
+        this.allMessages = new LinkedList<String>();
     }
     
     @PreDestroy
@@ -68,13 +75,10 @@ public class Chat implements Serializable{
     }
     
     public void displayNewMessage(String msg) {
-        /*UIComponent messageDiv = FacesContext.getCurrentInstance().getViewRoot().findComponent("messages");
-        if (messageDiv != null) {
-            HtmlOutputText newText = (HtmlOutputText)FacesContext.getCurrentInstance().getApplication().createComponent(HtmlOutputText.COMPONENT_TYPE);
-            newText.setValue(msg);
-
-            messageDiv.getChildren().add(newText);
-        }*/
+        
+        this.allMessages.add(msg);
+        
+        
         System.out.println("TO DO.....");
     }
     
@@ -96,6 +100,14 @@ public class Chat implements Serializable{
     
     public String navigateToChat() {
         return "/Chat.xhtml?faces-redirect=false";
+    }
+
+    public List<String> getAllMessages() {
+        return allMessages;
+    }
+
+    public void setAllMessages(List<String> allMessages) {
+        this.allMessages = allMessages;
     }
     
 }
