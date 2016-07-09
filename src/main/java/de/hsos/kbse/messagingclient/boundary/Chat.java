@@ -78,8 +78,6 @@ public class Chat implements Serializable{
         
         this.allMessages.add(msg);
         
-        
-        System.out.println("TO DO.....");
     }
     
     public String getUserName() {
